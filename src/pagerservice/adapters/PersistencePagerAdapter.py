@@ -1,26 +1,22 @@
-from abc import ABC, abstractmethod
-from typing import Optional
+from src.pagerservice.adapters.abs.PersistencePagerAdapterAbs import PersistencePagerAdapterAbs
 
-from entities import MonitoredService  # Make sure to import the MonitoredService class from the appropriate module
 
-class PersistencePagerAdapter(ABC):
+class PersistencePagerAdapter(PersistencePagerAdapterAbs):
     """
-    It contains the methods to manage the information from the Pager store system
+    Class to manage the information from the Pager store system.
     """
 
-    @abstractmethod
-    def get_monitored_service_by_id(self, service_id: int) -> Optional[MonitoredService]:
+    def get_monitored_service_by_id(self, service_id):
         """
-        It will get the information related to the monitored service
-        :param service_id: Identifier for the monitored service
-        :return: the monitored service entity retrieved
+        Get info for the monitored service
+        :param service_id: service id
+        :return monitored service
         """
-        pass
+        return None
 
-    @abstractmethod
-    def save_monitored_service(self, monitored_service: MonitoredService) -> None:
+    def save_monitored_service(self, monitored_service):
         """
-        It will store the information related to a monitored service
-        :param monitored_service: monitored service entity to be stored
+        Save the monitored service
+        :param monitored_service: monitored service to save
         """
-        pass
+        print("Monitored Service saved")

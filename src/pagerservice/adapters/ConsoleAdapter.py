@@ -1,22 +1,25 @@
-from abc import ABC, abstractmethod
+from src.pagerservice.adapters.abs.ConsoleAdapterAbs import ConsoleAdapterAbs
+from src.pagerservice.services.abs.PagerServiceAbs import PagerServiceAbs
 
-class ConsoleAdapter(ABC):
+
+class ConsoleAdapter(ConsoleAdapterAbs):
     """
-    It contains the methods that can be used with Pager Web Console
+    Class for Pager Web Console.
     """
 
-    @abstractmethod
-    def send_ack(self, service_id: int) -> None:
-        """
-        It will be used to notify the ACK from the Aircall engineer
-        :param service_id: Monitored Service Id that has to be updated
-        """
-        pass
+    def __init__(self, pager_service: PagerServiceAbs):
+        self.pager_service = pager_service
 
-    @abstractmethod
-    def send_healthy_event(self, service_id: int) -> None:
+    def send_ack(self, service_id):
         """
-        It will be used to notify a Healthy event from the Aircall engineer
-        :param service_id: Monitored Service Id that has to be updated
+        Function to notify with ACK
+        :param service_id: service id
         """
-        pass
+        self.pager_service.notify_ack(service_id)
+
+    def send_healthy_event(self, service_id):
+        """
+        Function to notify with health event
+        :param service_id: service id
+        """
+        self.pager_service.notify_healthy_event(service_id)

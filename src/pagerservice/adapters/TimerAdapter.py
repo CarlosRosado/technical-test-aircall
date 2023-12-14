@@ -1,23 +1,38 @@
-from abc import ABC, abstractmethod
+from src.pagerservice.adapters.abs.TimerAdapterAbs import TimerAdapterAbs
+from src.pagerservice.services.abs.PagerServiceAbs import PagerServiceAbs
+from typing import Optional
 
-class TimerAdapter(ABC):
+
+class TimerAdapter(TimerAdapterAbs):
     """
-    It contains the methods that can be used with the Timer Service
+    Class for Timer Service.
     """
 
-    @abstractmethod
-    def set_ack_timeout(self, service_id: int, minutes: int) -> None:
-        """
-        It will be used to set an ACK timeout in the timer service
-        :param service_id: Identifier of the monitored service
-        :param minutes: Timeout duration in minutes
-        """
-        pass
+    def __init__(self, pager_service: Optional[PagerServiceAbs] = None):
+        self.pager_service = pager_service
 
-    @abstractmethod
-    def ack_expired(self, service_id: int) -> None:
+    def set_ack_timeout(self, service_id, minutes):
         """
-        It will be used to notify the Pager Service that ack timeout is expired
-        :param service_id: Identifier of the monitored service
+        Set the ACK timeout
+        :param service_id: service id
+        :param minutes: minutes to ack
+        :return the OK message
         """
-        pass
+        print("The Ack timeout was sent to the timer service")
+        return "The Ack timeout was sent to the timer service"
+
+    def ack_expired(self, service_id):
+        """
+        Notified to Pager Service that ACK has expired
+        :param service_id: service id
+        """
+        self.get_pager_service().notify_ack_timeout(service_id)
+
+    def get_pager_service(self) -> PagerServiceAbs:
+        """
+        Get Pager Service Associated
+        :return pager service instance
+        """
+        if not self.pager_service:
+            self.pager_service = PagerService()
+        return self.pager_service

@@ -1,11 +1,12 @@
-from src.escalation.adapters.abs.SMSAdapterAbs import SMSAdapterAbs
+from abc import ABC, abstractmethod
 
 
-class SMSAdapter(SMSAdapterAbs):
+class SMSAdapterAbs(ABC):
     """
     Methods that can be used with the SMS Service
     """
 
+    @abstractmethod
     def send_sms(self, phone_number, message):
         """
         Function used to send sms (message) to a specific phone number.
@@ -13,7 +14,5 @@ class SMSAdapter(SMSAdapterAbs):
         Parameters:
         :param phone_number: Phone number
         :param message: Content to send
-        :return Message for register message
         """
-        print("SMS sent properly to: " + phone_number)
-        return "SMS sent properly to: " + phone_number
+        pass
