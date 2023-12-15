@@ -7,7 +7,7 @@ The architecture design is:
 
 ![Architecture of the Alert Notification System](architecture-diagram.png)
 
-## Development
+## 1. How to Implement
 
 This project was build using Python 8 because I have more experience with this language.
 
@@ -18,11 +18,11 @@ presented before.
 * All the test are inside in test folder, I realize all test to check the main functionality. For this solution I used Python Unittest.
 * Main file have an example of execution few calls.
 
-## How to test it
+## 2. How to Testing
 
 You can execute all test in Python terminal or IDE and execute the file PagerServiceTest.py inside test folder.
 
-## Assumptions
+## 3. Need to Know
 
 For a correct testing the code, I assume the following thinks:
 
@@ -31,6 +31,6 @@ For a correct testing the code, I assume the following thinks:
 * I assume the PagerDB is created, but not implement in this solution.
 
 
-## Concurrency
+## 4. Concurrency
 
 For addressing challenges in the persistence layer is consistently handling operations in the database to uphold ACID principles and ensuring proper transaction management. Additionally, one could consider implementing a strategy for optimistic or pessimistic locking.
